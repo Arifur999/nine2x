@@ -303,8 +303,8 @@ export default function BrowseView({ onOpenQuick, onOpenFull }: Props) {
               )
             : items.map((item, idx) => {
                 const posterUrl = item.poster_path
-                  ? CONFIG.W500 + item.poster_path
-                  : 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=80';
+                  ? CONFIG.W342 + item.poster_path
+                  : 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=342&auto=format&fit=crop&q=80';
                 const type = item.media_type || state.mediaType;
                 const title = Utils.titleOf(item);
                 const year = Utils.year(item.release_date || item.first_air_date);

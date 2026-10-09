@@ -10,7 +10,9 @@ export const CONFIG = {
   API_KEY: process.env.NEXT_PUBLIC_TMDB_API_KEY || '05902896074695709d7763505bb88b4d',
   BASE: '/api/tmdb?path=',
   W500: process.env.NEXT_PUBLIC_TMDB_W500 || 'https://image.tmdb.org/t/p/w500',
-  ORIG: process.env.NEXT_PUBLIC_TMDB_ORIG || 'https://image.tmdb.org/t/p/original',
+  W342: 'https://image.tmdb.org/t/p/w342',
+  W185: 'https://image.tmdb.org/t/p/w185',
+  ORIG: process.env.NEXT_PUBLIC_TMDB_ORIG || 'https://image.tmdb.org/t/p/w1280',
 
   SERVERS: [
     {

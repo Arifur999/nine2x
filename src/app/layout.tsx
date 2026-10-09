@@ -204,19 +204,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en' dir='ltr' className={outfit.variable}>
       <head>
         {/* Preconnect for performance */}
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
-        <link rel='preconnect' href='https://api.themoviedb.org' />
-        <link rel='preconnect' href='https://image.tmdb.org' />
+        <link rel='preconnect' href='https://image.tmdb.org' crossOrigin='anonymous' />
+        <link rel='dns-prefetch' href='https://image.tmdb.org' />
         <link rel='dns-prefetch' href='https://cdnjs.cloudflare.com' />
 
-        {/* FontAwesome — load with display swap for performance */}
+        {/* FontAwesome — loaded asynchronously to prevent render-blocking */}
+        <link
+          rel='preload'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+          as='style'
+          crossOrigin='anonymous'
+        />
         <link
           rel='stylesheet'
           href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
           crossOrigin='anonymous'
-          referrerPolicy='no-referrer'
+          media='print'
+          // @ts-expect-error - React standard async stylesheet trick
+          onLoad="this.media='all'"
         />
+        <noscript>
+          <link
+            rel='stylesheet'
+            href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+          />
+        </noscript>
 
         {/* JSON-LD Structured Data */}
         <script

@@ -71,9 +71,10 @@ function RowSection({ row, onOpenQuick, onSeeAll }: { row: RowConfig; onOpenQuic
               >
                 <div style={{ position: 'relative', aspectRatio: '2/3', overflow: 'hidden' }}>
                   <img
-                    src={CONFIG.W500 + item.poster_path}
+                    src={CONFIG.W342 + item.poster_path}
                     alt={item.title || item.name}
                     loading='lazy'
+                    decoding='async'
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                   />
                   {i < 3 && (
