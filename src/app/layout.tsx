@@ -205,27 +205,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel='dns-prefetch' href='https://image.tmdb.org' />
         <link rel='dns-prefetch' href='https://cdnjs.cloudflare.com' />
 
-        {/* FontAwesome — loaded asynchronously to prevent render-blocking */}
-        <link
-          rel='preload'
-          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
-          as='style'
-          crossOrigin='anonymous'
-        />
+        {/* FontAwesome Icons */}
         <link
           rel='stylesheet'
-          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+          href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'
           crossOrigin='anonymous'
-          media='print'
-          // @ts-expect-error - React standard async stylesheet trick
-          onLoad="this.media='all'"
+          referrerPolicy='no-referrer'
         />
-        <noscript>
-          <link
-            rel='stylesheet'
-            href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
-          />
-        </noscript>
 
         {/* JSON-LD Structured Data */}
         <script
