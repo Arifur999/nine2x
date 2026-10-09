@@ -67,10 +67,9 @@ export default function HeroSlider({ onOpenFull, onOpenQuick }: Props) {
               <img
                 src={CONFIG.ORIG + s.backdrop_path}
                 alt={s.title || s.name || 'Hero Banner'}
-                // @ts-expect-error - fetchPriority is modern HTML spec for LCP
-                fetchPriority={i === 0 ? 'high' : 'auto'}
                 loading={i === 0 ? 'eager' : 'lazy'}
                 decoding={i === 0 ? 'sync' : 'async'}
+                {...({ fetchPriority: i === 0 ? 'high' : 'auto' } as React.ImgHTMLAttributes<HTMLImageElement>)}
                 style={{
                   width: '100%',
                   height: '100%',
