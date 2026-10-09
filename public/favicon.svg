@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF1E27" />
+      <stop offset="100%" stop-color="#B20710" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  
+  <!-- Rounded App Background -->
+  <rect width="100" height="100" rx="24" fill="#0A0A0E"/>
+  <rect x="2" y="2" width="96" height="96" rx="22" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  
+  <!-- Glowing Cinema Play Badge -->
+  <rect x="14" y="14" width="72" height="72" rx="18" fill="url(#grad)" filter="url(#shadow)"/>
+  
+  <!-- Sleek Play Triangle -->
+  <polygon points="41,33 71,50 41,67" fill="#FFFFFF"/>
+</svg>
