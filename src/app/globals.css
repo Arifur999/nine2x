@@ -1,0 +1,275 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Core Web Vitals: Prevent Cumulative Layout Shift (CLS) ── */
+img, video, iframe {
+  aspect-ratio: attr(width) / attr(height);
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+/* Reserve space for hero images before they load (prevents LCP layout shift) */
+.hero-stage,
+.hero-stage * { will-change: transform, opacity; }
+
+/* ── Accessibility: focus-visible ring ── */
+*:focus-visible {
+  outline: 2px solid #E50914;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+*:focus:not(:focus-visible) { outline: none; }
+
+/* ── Reduced Motion: respect user preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Print styles ── */
+@media print {
+  nav, footer, .bottom-nav, .modal-veil { display: none !important; }
+  body { background: white; color: black; }
+}
+
+/* ============================================================
+   PLAYFLIX v2.0 — Global CSS
+============================================================ */
+
+:root {
+  --bg-base: #060608;
+  --bg-surface: #0e0e12;
+  --bg-surface-2: #16161c;
+  --bg-surface-3: #1e1e26;
+  --bg-glass: rgba(14, 14, 18, 0.8);
+  --bg-glass-heavy: rgba(6, 6, 8, 0.92);
+  --bg-card: #12121a;
+
+  --brand-primary: #e50914;
+  --brand-primary-hover: #ff0f1c;
+  --brand-primary-dim: rgba(229, 9, 20, 0.12);
+  --brand-accent: #00d4ff;
+  --brand-accent-dim: rgba(0, 212, 255, 0.1);
+  --brand-gold: #ffd700;
+  --brand-green: #46d369;
+  --brand-glow: 0 0 30px rgba(229, 9, 20, 0.35);
+
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3c4;
+  --text-tertiary: #6b6b80;
+  --text-muted: #454555;
+
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-light: rgba(255, 255, 255, 0.09);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-focus: rgba(229, 9, 20, 0.6);
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.75);
+
+  --navbar-h: 70px;
+  --bottom-nav-h: 60px;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input {
+  font-family: inherit;
+  outline: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface-3);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-primary);
+}
+
+/* ── Container ── */
+.container {
+  width: 100%;
+  max-width: 1640px;
+  margin: 0 auto;
+  padding: 0 4%;
+}
+
+/* ── Shimmer skeleton ── */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-surface-2);
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+  animation: shimmer 1.8s infinite;
+}
+
+/* ── Progress bar ── */
+#progress-bar-outer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+#progress-bar-inner {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--brand-primary), #ff6b6b, var(--brand-accent));
+  box-shadow: 0 0 12px var(--brand-primary);
+  transition: width 0.25s ease-out;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+}
+
+/* ── Mobile body padding & responsive refinements ── */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(var(--bottom-nav-h) + 12px);
+  }
+  :root {
+    --navbar-h: 62px;
+  }
+  .container {
+    padding: 0 5%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .container {
+    padding: 0 4%;
+  }
+}
+
+/* ── Touch targets & buttons ── */
+button, a {
+  touch-action: manipulation;
+}
+
+/* ── Selection styling ── */
+::selection {
+  background: var(--brand-primary);
+  color: #ffffff;
+}
+
+/* ── Hz scroll rows ── */
+.hz-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hz-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Fade in animation ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease;
+}
+
+/* ── Drop in ── */
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-drop-in {
+  animation: dropIn 0.22s ease forwards;
+}
+
+/* ── Slide down ── */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-down {
+  animation: slideDown 0.3s ease;
+}
+
+/* ── Pulse mic ── */
+@keyframes pulseMic {
+  0%, 100% { color: var(--brand-primary); }
+  50% { color: white; text-shadow: 0 0 12px var(--brand-primary); }
+}
+.animate-pulse-mic {
+  animation: pulseMic 1.2s ease-in-out infinite;
+}

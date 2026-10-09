@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Block any admin or API routes from indexing
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://nine2x.tech/sitemap.xml
