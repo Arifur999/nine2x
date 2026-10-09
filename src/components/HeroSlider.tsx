@@ -52,18 +52,35 @@ export default function HeroSlider({ onOpenFull, onOpenQuick }: Props) {
         minHeight: 560, maxHeight: 860, borderRadius: 24, overflow: 'hidden',
         boxShadow: '0 24px 64px rgba(0,0,0,0.9)',
       }}>
-        {/* Background */}
+        {/* Background & LCP Image */}
         {slides.map((s, i) => (
           <div
             key={s.id}
             style={{
               position: 'absolute', inset: 0,
-              backgroundImage: `url(${CONFIG.ORIG + s.backdrop_path})`,
-              backgroundSize: 'cover', backgroundPosition: 'center 15%',
               opacity: i === idx ? 1 : 0,
-              transition: 'opacity 0.9s ease',
+              transition: 'opacity 0.8s ease',
+              overflow: 'hidden',
             }}
-          />
+          >
+            {s.backdrop_path && (
+              <img
+                src={CONFIG.ORIG + s.backdrop_path}
+                alt={s.title || s.name || 'Hero Banner'}
+                // @ts-expect-error - fetchPriority is modern HTML spec for LCP
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding={i === 0 ? 'sync' : 'async'}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center 15%',
+                  display: 'block',
+                }}
+              />
+            )}
+          </div>
         ))}
         {/* Gradient overlays */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(100deg, rgba(6,6,8,0.97) 0%, rgba(6,6,8,0.5) 45%, rgba(6,6,8,0.05) 100%)', zIndex: 1 }} />

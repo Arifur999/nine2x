@@ -44,7 +44,11 @@ export default function OTTTabs() {
               <img
                 src={p.logo}
                 alt={p.name}
-                style={{ height: 20, maxWidth: 80, objectFit: 'contain', filter: p.invert ? 'invert(1) brightness(0.9)' : 'none' }}
+                width={60}
+                height={20}
+                loading='lazy'
+                decoding='async'
+                style={{ height: 20, width: 'auto', maxWidth: 80, objectFit: 'contain', filter: p.invert ? 'invert(1) brightness(0.9)' : 'none' }}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
             ) : (
